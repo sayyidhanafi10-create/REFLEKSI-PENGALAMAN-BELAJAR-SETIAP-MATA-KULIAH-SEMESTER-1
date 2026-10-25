@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Portfolio Refleksi Pengalaman Belajar (LK 2) Semester 1 | Muhammad Sayyid Hanafi</title>
+    <style>
+        :root {
+            --header-gradient-start: #0f172a;
+            --header-gradient-end: #1e3a8a;
+            --body-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-blue: #2563eb;
+            --accent-light: #eff6ff;
+            --border-color: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--body-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        .top-bar {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .top-bar .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .top-bar .brand-badge {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .top-bar .meta-info {
+            display: flex;
+            gap: 16px;
+            color: #94a3b8;
+        }
+
+        .hero-header {
+            background: linear-gradient(135deg, var(--header-gradient-start), var(--header-gradient-end));
+            color: white;
+            padding: 50px 20px 60px 20px;
+            text-align: center;
+        }
+
+        .hero-header .subtitle-badge {
+            display: inline-block;
+            background-color: rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(147, 197, 253, 0.4);
+            color: #93c5fd;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .hero-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .hero-header p {
+            font-size: 14px;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        .hero-header .info-pills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 13px;
+        }
+
+        .info-pill {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 6px;
+            color: #f1f5f9;
+        }
+
+        .main-container {
+            max-width: 1040px;
+            margin: -30px auto 0 auto;
+            padding: 0 16px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .portfolio-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.15);
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+        }
+
+        .tabs-nav {
+            display: flex;
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding: 6px 8px 0 8px;
+        }
+
+        .tabs-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--accent-blue);
+            background-color: #f8fafc;
+        }
+
+        .tab-btn.active {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+            background-color: #ffffff;
+        }
+
+        .content-body {
+            padding: 36px;
+            min-height: 500px;
+        }
+
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+        }
+
+        .section-header h2 {
+            font-size: 20px;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .section-header p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .grid-4c {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .card-4c {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid var(--accent-blue);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .card-4c h4 {
+            font-size: 14px;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-4c p {
+            font-size: 13px;
+            color: #334155;
+        }
+
+        .inner-box {
+            background-color: var(--accent-light);
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .inner-box h3 {
+            font-size: 15px;
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+
+        .inner-box p, .inner-box ul {
+            font-size: 13px;
+            color: #1e3a8a;
+        }
+
+        .inner-box ul {
+            padding-left: 18px;
+            margin-top: 6px;
+        }
+
+        .inner-box li {
+            margin-bottom: 4px;
+        }
+
+        .profile-container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .profile-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .avatar-placeholder {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 14px auto;
+        }
+
+        .profile-card h3 {
+            font-size: 16px;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .profile-card p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .profile-details {
+            text-align: left;
+            font-size: 12px;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 12px;
+        }
+
+        .profile-details div {
+            margin-bottom: 6px;
+        }
+
+        .quote-box {
+            background-color: #ffffff;
+            border-left: 4px solid var(--accent-blue);
+            border: 1px solid #e2e8f0;
+            border-left-width: 4px;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            color: #334155;
+        }
+
+        .quote-box h4 {
+            font-size: 14px;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .card-footer {
+            background-color: #f8fafc;
+            border-top: 1px solid var(--border-color);
+            padding: 16px 36px;
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+            .content-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="brand">
+            <span class="brand-badge">MSH</span>
+            <span>Muhammad Sayyid Hanafi</span>
+        </div>
+        <div class="meta-info">
+            <span>SMP Negeri 9 Yogyakarta</span>
+            <span>•</span>
+            <span>PPG Prajabatan 2026</span>
+        </div>
+    </div>
+
+    <header class="hero-header">
+        <span class="subtitle-badge">LEMBAR KERJA 2 (LK 2) • PORTOFOLIO DIGITAL</span>
+        <h1>Menjadi Guru, Bertumbuh dalam Proses</h1>
+        <p>E-Portfolio Refleksi Pengalaman Belajar Semester 1 — Bidang Studi Pendidikan IPS<br>Universitas Negeri Yogyakarta — Tahun 2026</p>
+        <div class="info-pills">
+            <span class="info-pill">👤 Muhammad Sayyid Hanafi (NIM: 25105260622)</span>
+            <span class="info-pill">🏫 LPTK: Universitas Negeri Yogyakarta</span>
+            <span class="info-pill">📍 PPL: SMP Negeri 9 Yogyakarta</span>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="portfolio-card">
+            
+            <nav class="tabs-nav">
+                <button class="tab-btn active" onclick="openTab(event, 'tab-beranda')">📌 Beranda</button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-fppn')">📘 Filosofi Pendidikan</button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-ppdp')">👥 PPDP</button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-growth')">🌱 Growth Mindset</button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-pma')">🧠 PMA Dasar</button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-pki')">💡 Kreatif Inovatif</button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-ppl')">🏫 PPL Terbimbing</button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-penutup')">🏁 Refleksi Penutup</button>
+            </nav>
+
+            <div class="content-body">
+
+                <!-- 1. BERANDA -->
+                <div id="tab-beranda" class="tab-pane active">
+                    <div class="section-header">
+                        <h2>Profil Diri, LPTK, dan Kesiapan Guru Profesional</h2>
+                        <p>Gambaran umum identitas praktikan, landasan refleksi 6 mata kuliah semester 1, dan komitmen pengembangan diri.</p>
+                    </div>
+
+                    <div class="profile-container">
+                        <div class="profile-card">
+                            <div class="avatar-placeholder">MSH</div>
+                            <h3>Muhammad Sayyid Hanafi</h3>
+                            <p>Mahasiswa PPG Prajabatan 2026</p>
+                            <div class="profile-details">
+                                <div><strong>NIM:</strong> 25105260622[cite: 19]</div>
+                                <div><strong>Prodi:</strong> Pendidikan IPS[cite: 19]</div>
+                                <div><strong>LPTK:</strong> Univ. Negeri Yogyakarta</div>
+                                <div><strong>Lokasi PPL:</strong> SMPN 9 Yogyakarta[cite: 18, 20]</div>
+                            </div>
+                        </div>
+
+                        <div class="quote-box">
+                            <h4>💬 Pengantar & Tujuan Portofolio</h4>
+                            <p>Portofolio digital ini dirancang untuk merangkum perjalanan reflektif saya selama semester pertama PPG Calon Guru. Melalui kerangka refleksi <strong>4C (Connection, Challenge, Concept, Change)</strong> serta analisis artefak otentik dari enam mata kuliah, portofolio ini mendokumentasikan proses bertransformasi menjadi pendidik profesional yang reflektif, adaptif, dan berpusat pada peserta didik.</p>
+                            <br>
+                            <p>Saya meyakini bahwa menjadi guru bukan sekadar menyampaikan materi kurikulum, melainkan menuntun kodrat peserta didik dengan penuh empati, merancang pengalaman belajar bermakna, serta terus mengevaluasi praktik pembelajaran secara berkelanjutan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. FILOSOFI PENDIDIKAN -->
+                <div id="tab-fppn" class="tab-pane">
+                    <div class="section-header">
+                        <h2>Refleksi Mata Kuliah: Filosofi Pendidikan Indonesia</h2>
+                        <p>Menelaah pemikiran Ki Hajar Dewantara, sistem Among, dan penciptaan ruang belajar yang berpihak pada murid.</p>
+                    </div>
+
+                    <div class="grid-4c">
+                        <div class="card-4c">
+                            <h4>🔗 Connection</h4>
+                            <p>Pemikiran KHD menyadarkan bahwa guru adalah <em>pamong</em> yang menuntun kodrat alam dan kodrat zaman peserta didik[cite: 18], bukan memaksakan kehendak[cite: 18].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>⚠️ Challenge</h4>
+                            <p>Mengevaluasi anggapan bahwa kelas tenang/pasif adalah ideal[cite: 18]. Keheningan sering kali lahir dari rasa takut salah, serta perlunya menghindari pendekatan seragam bagi siswa <em>slow learner</em>[cite: 18].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>💡 Concept</h4>
+                            <p>Pendidikan berpihak pada murid, kodrat alam & zaman, Sistem Among (Ing Ngarsa Sung Tulada, Ing Madya Mangun Karsa, Tut Wuri Handayani), serta pembelajaran inklusif[cite: 18].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>🔄 Change</h4>
+                            <p>Membangun iklim kelas yang aman secara psikologis, memberi alternatif cara menjawab bagi siswa pemalu/pasif, serta scaffolding bagi siswa <em>slow learner</em>[cite: 18].</p>
+                        </div>
+                    </div>
+
+                    <div class="inner-box">
+                        <h3>📁 Analisis Artefak Pembelajaran & Catatan Implementasi</h3>
+                        <p><strong>Artefak:</strong> Modul Ajar Terdiferensiasi materi Perdagangan Internasional di SMPN 9 Yogyakarta, LKPD Puzzle, dan lembar kerja peserta didik[cite: 18].</p>
+                        <ul>
+                            <li><strong>Alasan Pemilihan:</strong> Membuktikan bagaimana filosofi KHD diterjemahkan menjadi pilihan aktivitas kelompok kecil dan diferensiasi proses[cite: 18].</li>
+                            <li><strong>Catatan Realitas Kelas:</strong> Perhatian guru sempat terbagi dalam mengelola alokasi waktu keseluruhan sehingga pendampingan intensif bagi siswa <em>slow learner</em> sempat tergeser. Ke depan akan dioptimalkan melalui tutor sebaya[cite: 18].</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 3. PPDP -->
+                <div id="tab-ppdp" class="tab-pane">
+                    <div class="section-header">
+                        <h2>Refleksi Mata Kuliah: Pemahaman tentang Peserta Didik dan Pembelajarannya (PPDP)</h2>
+                        <p>Menganalisis karakteristik, teori perkembangan, profiling, dan penciptaan lingkungan belajar yang aman.</p>
+                    </div>
+
+                    <div class="grid-4c">
+                        <div class="card-4c">
+                            <h4>🔗 Connection</h4>
+                            <p>Perencanaan pembelajaran wajib berakar dari pemahaman mendalam atas tahap perkembangan, kebutuhan, minat, dan lingkungan belajar peserta didik[cite: 22].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>⚠️ Challenge</h4>
+                            <p>Menghindari asumsi bahwa semua siswa belajar dengan kecepatan sama serta memastikan proses <em>profiling</em> benar-benar terintegrasi dalam perancangan strategi[cite: 19].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>💡 Concept</h4>
+                            <p>Konstruktivisme, humanisme, belajar sosial, lingkungan belajar yang aman-nyaman, serta teknik <em>profiling</em> holistik peserta didik[cite: 19, 22].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>🔄 Change</h4>
+                            <p>Membiasakan pemeriksaan pengetahuan awal sebelum pembelajaran dan mengevaluasi hasil asesmen secara berkala untuk penyesuaian strategi[cite: 19].</p>
+                        </div>
+                    </div>
+
+                    <div class="inner-box">
+                        <h3>📁 Analisis Artefak Pembelajaran & Catatan Implementasi</h3>
+                        <p><strong>Artefak:</strong> Tugas 3C (Analisis Fishbone & Koneksi Teoretis Kasus Bu Sinta) & Tugas 3D (Rancangan Strategi Alternatif seperti <em>Gamified Collaborative Learning</em> & <em>Peer Tutoring</em>)[cite: 19, 22].</p>
+                        <ul>
+                            <li><strong>Tautan Artefak 3C:</strong> <a href="https://drive.google.com/file/d/1I4lwzRUIvAYwNy5S4jD9X7mtriyAC-bb/view?usp=sharing" target="_blank" style="color: #2563eb;">Buka Google Drive (Tugas 3C)</a>[cite: 19, 22]</li>
+                            <li><strong>Tautan Artefak 3D:</strong> <a href="https://drive.google.com/file/d/1JMgntu4vnhBXT182oCWi9ZLWZLL5YLMB/view?usp=sharing" target="_blank" style="color: #2563eb;">Buka Google Drive (Tugas 3D)</a>[cite: 19, 22]</li>
+                            <li><strong>Catatan Realitas Kelas:</strong> Tantangan menjaga batasan profesional antara guru dan siswa. Kedekatan yang terlalu santai sempat membuat sebagian siswa kurang disiplin, sehingga ketegasan yang hangat sangat diperlukan[cite: 22].</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 4. GROWTH MINDSET -->
+                <div id="tab-growth" class="tab-pane">
+                    <div class="section-header">
+                        <h2>Refleksi Mata Kuliah: Growth Mindset (Pola Pikir Bertumbuh)</h2>
+                        <p>Membangun keyakinan bahwa kapasitas diri dapat dikembangkan melalui usaha, strategi, dan belajar dari kesalahan.</p>
+                    </div>
+
+                    <div class="grid-4c">
+                        <div class="card-4c">
+                            <h4>🔗 Connection</h4>
+                            <p>Keyakinan guru terhadap potensi siswa memengaruhi cara memberikan tugas, menanggapi kesalahan, dan memberikan umpan balik konstruktif[cite: 17].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>⚠️ Challenge</h4>
+                            <p>Mengubah kebiasaan memberi pujian hasil akhir (*person praise*) menjadi pujian proses (*process praise*) serta menerapkan konsep *Power of Yet* ("belum")[cite: 17].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>💡 Concept</h4>
+                            <p>Fixed vs Growth Mindset, lima area kunci respons terhadap tantangan/kritik, serta penggunaan kritik proses yang membangun[cite: 17].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>🔄 Change</h4>
+                            <p>Konsisten menggunakan bahasa yang mendorong perkembangan proses belajar serta menciptakan iklim kelas yang aman dari rasa takut salah[cite: 17].</p>
+                        </div>
+                    </div>
+
+                    <div class="inner-box">
+                        <h3>📁 Analisis Artefak Pembelajaran & Catatan Implementasi</h3>
+                        <p><strong>Artefak:</strong> LK 1.2 "Membaca Pola Pikir" dan LK 2.4 "Dari 'Aduh, saya Gagal' ke 'Saya Bisa!'"[cite: 17, 19].</p>
+                        <ul>
+                            <li><strong>Alasan Pemilihan:</strong> Menunjukkan kemampuan mengenali perbedaan pola pikir dan menerapkannya dalam situasi pembelajaran saat siswa menghadapi kesulitan[cite: 17].</li>
+                            <li><strong>Catatan Realitas Kelas:</strong> Sebagian siswa masih takut salah dan berorientasi pada nilai akhir; guru terus melatih respons berbasis strategi alih-alih vonis hasil[cite: 17].</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 5. PMA DASAR -->
+                <div id="tab-pma" class="tab-pane">
+                    <div class="section-header">
+                        <h2>Refleksi Mata Kuliah: Pembelajaran Mendalam dan Asesmen Dasar (PMA Dasar)</h2>
+                        <p>Merancang pengalaman belajar yang bermakna, berkesadaran, dan menyenangkan (mindful, meaningful, joyful).</p>
+                    </div>
+
+                    <div class="grid-4c">
+                        <div class="card-4c">
+                            <h4>🔗 Connection</h4>
+                            <p>Pembelajaran IPS harus menghubungkan konsep abstrak dengan realitas kehidupan nyata peserta didik, didukung asesmen diagnostik terintegrasi[cite: 21].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>⚠️ Challenge</h4>
+                            <p>Bergeser dari orientasi penyelesaian target buku paket menuju pendalaman pemahaman konseptual yang kritis[cite: 21].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>💡 Concept</h4>
+                            <p>Sistematika Understanding by Design (UbD), Rencana Pembelajaran Mendalam (RPM), pertanyaan pemantik, serta asesmen yang selaras dengan tujuan[cite: 19, 21].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>🔄 Change</h4>
+                            <p>Menyusun RPM berbasis masalah kontekstual serta menggunakan hasil asesmen formatif sebagai landasan perbaikan proses belajar[cite: 21].</p>
+                        </div>
+                    </div>
+
+                    <div class="inner-box">
+                        <h3>📁 Analisis Artefak Pembelajaran</h3>
+                        <p><strong>Artefak:</strong> Tugas Topik 3 tentang Implementasi Pembelajaran Mendalam, termasuk Rencana Pembelajaran Mendalam (RPM) "Mengenal Peran Pasar dalam Kehidupan Ekonomi" (Pre-test, LKPD, instrumen penilaian)[cite: 19, 21].</p>
+                        <ul>
+                            <li><strong>Alasan Pemilihan:</strong> Membuktikan keterpaduan antara tujuan, pertanyaan pemantik, aktivitas kolaboratif (*snowball throwing*), dan asesmen diagnostik[cite: 21].</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 6. KREATIF INOVATIF -->
+                <div id="tab-pki" class="tab-pane">
+                    <div class="section-header">
+                        <h2>Refleksi Mata Kuliah: Pembelajaran Kreatif dan Inovatif (PKI)</h2>
+                        <p>Mengintegrasikan TPACK, media digital interaktif, dan simulasi kontekstual untuk keterampilan abad ke-21.</p>
+                    </div>
+
+                    <div class="grid-4c">
+                        <div class="card-4c">
+                            <h4>🔗 Connection</h4>
+                            <p>Guru sebagai desainer pembelajaran yang merancang pengalaman aktif untuk mengembangkan kreativitas, berpikir kritis, dan kolaborasi siswa[cite: 16].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>⚠️ Challenge</h4>
+                            <p>Memandang teknologi bukan sekadar media presentasi satu arah, melainkan sarana eksplorasi mandiri dan pemecahan masalah[cite: 16].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>💡 Concept</h4>
+                            <p>TPACK, Problem Based Learning, Project Based Learning, simulasi digital, dan asesmen berorientasi proses[cite: 16].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>🔄 Change</h4>
+                            <p>Konsisten memanfaatkan teknologi secara bermakna melalui studi kasus dan simulasi keuangan yang dekat dengan realitas kehidupan siswa[cite: 16].</p>
+                        </div>
+                    </div>
+
+                    <div class="inner-box">
+                        <h3>📁 Analisis Artefak Pembelajaran & Catatan Implementasi</h3>
+                        <p><strong>Artefak:</strong> Rancangan Pembelajaran Materi "Uang dan Lembaga Keuangan" menggunakan Canva Site / Canva AI[cite: 16].</p>
+                        <ul>
+                            <li><strong>Tautan Artefak:</strong> <a href="https://drive.google.com/file/d/18rj1FgcrzmBUw3SiK3128BFk3Y8QjTWP/view?usp=sharing" target="_blank" style="color: #2563eb;">Buka Google Drive (Artefak PKI)</a>[cite: 16]</li>
+                            <li><strong>Status Pelaksanaan:</strong> Perancangan dan pengembangan media berbasis Canva Site sudah selesai, namun implementasi langsung kepada peserta didik belum terlaksana secara penuh akibat keterbatasan alokasi waktu[cite: 16].</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 7. PPL TERBIMBING -->
+                <div id="tab-ppl" class="tab-pane">
+                    <div class="section-header">
+                        <h2>Refleksi Mata Kuliah: Praktik Pengalaman Lapangan (PPL) Terbimbing</h2>
+                        <p>Pengalaman mengajar langsung di sekolah mitra (SMP Negeri 9 Yogyakarta), pengelolaan kelas, dan refleksi bersama guru pamong.</p>
+                    </div>
+
+                    <div class="grid-4c">
+                        <div class="card-4c">
+                            <h4>🔗 Connection</h4>
+                            <p>Medan verifikasi nyata untuk menerapkan seluruh teori pedagogis dan perangkat pembelajaran ke dalam situasi kelas di sekolah mitra[cite: 20].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>⚠️ Challenge</h4>
+                            <p>Menghadapi dinamika kelas nyata, keterbatasan waktu, serta variasi respons siswa yang menuntut pengambilan keputusan secara adaptif[cite: 20].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>💡 Concept</h4>
+                            <p>Siklus perencanaan-pelaksanaan-evaluasi, pendekatan Deep Learning, manajemen kelas, serta refleksi berkelanjutan[cite: 20].</p>
+                        </div>
+                        <div class="card-4c">
+                            <h4>🔄 Change</h4>
+                            <p>Meningkatkan kemampuan mengelola waktu, memberikan instruksi presisi, serta menjadikan umpan balik guru pamong sebagai landasan perbaikan diri[cite: 20].</p>
+                        </div>
+                    </div>
+
+                    <div class="inner-box">
+                        <h3>📁 Analisis Artefak Pembelajaran & Catatan Implementasi</h3>
+                        <p><strong>Artefak:</strong> Perangkat Pembelajaran PPL Terbimbing di SMP Negeri 9 Yogyakarta[cite: 20].</p>
+                        <ul>
+                            <li><strong>Tautan Artefak:</strong> <a href="https://bit.ly/4iET7CI" target="_blank" style="color: #2563eb;">Buka Tautan Perangkat PPL</a>[cite: 20]</li>
+                            <li><strong>Status Pelaksanaan:</strong> Perangkat ajar, media, dan asesmen telah disusun dan diimplementasikan dalam praktik mengajar terbimbing di SMPN 9 Yogyakarta, sementara profiling siswa secara menyeluruh dan evaluasi efektivitas media lanjutan menjadi rencana tindak lanjut[cite: 20].</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 8. REFLEKSI PENUTUP -->
+                <div id="tab-penutup" class="tab-pane">
+                    <div class="section-header">
+                        <h2>Refleksi Akhir Semester I</h2>
+                        <p>Sintesis perjalanan belajar dan komitmen pengembangan profesional sebagai calon guru masa depan.</p>
+                    </div>
+
+                    <div class="quote-box" style="margin-bottom: 20px;">
+                        <h4>🌟 Sintesis Enam Mata Kuliah</h4>
+                        <p>Enam mata kuliah semester pertama membentuk satu kesatuan utuh: <strong>Filosofi Pendidikan Indonesia</strong> menjadi kompas penuntun[cite: 18], <strong>PPDP</strong> membekali pemahaman karakteristik siswa[cite: 22], <strong>Growth Mindset</strong> membangun resiliensi[cite: 17], <strong>PMA Dasar</strong> mengarahkan makna belajar[cite: 21], <strong>PKI</strong> mendorong inovasi digital[cite: 16], dan <strong>PPL Terbimbing</strong> menjadi ruang uji nyata di sekolah mitra[cite: 20].</p>
+                    </div>
+
+                    <div class="inner-box">
+                        <h3>🎯 Komitmen Pengembangan Diri</h3>
+                        <p>Menjadi guru profesional bukanlah tentang kesempurnaan tanpa kendala, melainkan kemampuan membaca situasi, menerima masukan, mengevaluasi bukti belajar, dan memperbaiki keputusan secara konsisten. Ke depan, saya berkomitmen untuk:</p>
+                        <ul>
+                            <li>Merencanakan pembelajaran yang berpusat pada kebutuhan dan karakteristik peserta didik.</li>
+                            <li>Melaksanakan asesmen secara berkelanjutan serta memberikan umpan balik konstruktif.</li>
+                            <li>Menjaga budaya refleksi diri secara rutin setelah setiap sesi pembelajaran di kelas.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-footer">
+                <span>© 2026 E-Portfolio Praktik Mengajar & Refleksi — Muhammad Sayyid Hanafi (NIM: 25105260622)</span>
+                <span>PPG Prajabatan • Universitas Negeri Yogyakarta</span>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabId) {
+            const tabpanes = document.querySelectorAll('.tab-pane');
+            tabpanes.forEach(pane => pane.classList.remove('active'));
+
+            const tabbtns = document.querySelectorAll('.tab-btn');
+            tabbtns.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
